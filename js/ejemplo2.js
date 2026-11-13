@@ -65,27 +65,35 @@ function validarFormulario(intereses, carrera) {
 function crearTabla(titulo, encabezados, filas) {
     const tabla = document.createElement("table");
     tabla.className = "table table-sm align-middle caption-top text-break";
-    const caption = tabla.createCaption();
+    const caption = document.createElement("caption");
     caption.className = "fw-bold text-body";
-    caption.textContent = titulo;
+    caption.appendChild(document.createTextNode(titulo));
+    tabla.appendChild(caption);
 
-    const encabezado = tabla.createTHead().insertRow();
+    const cabecera = document.createElement("thead");
+    const encabezado = document.createElement("tr");
     for (const texto of encabezados) {
         const celda = document.createElement("th");
         celda.scope = "col";
-        celda.textContent = texto;
+        celda.appendChild(document.createTextNode(texto));
         encabezado.appendChild(celda);
     }
+    cabecera.appendChild(encabezado);
+    tabla.appendChild(cabecera);
 
-    const cuerpo = tabla.createTBody();
+    const cuerpo = document.createElement("tbody");
     for (const [nombre, valor] of filas) {
-        const fila = cuerpo.insertRow();
+        const fila = document.createElement("tr");
         const etiqueta = document.createElement("th");
         etiqueta.scope = "row";
-        etiqueta.textContent = nombre;
+        etiqueta.appendChild(document.createTextNode(nombre));
+        const celda = document.createElement("td");
+        celda.appendChild(document.createTextNode(valor));
         fila.appendChild(etiqueta);
-        fila.insertCell().textContent = valor;
+        fila.appendChild(celda);
+        cuerpo.appendChild(fila);
     }
+    tabla.appendChild(cuerpo);
     return tabla;
 }
 
@@ -102,10 +110,11 @@ function mostrarRegistro(intereses, carrera) {
         ["País de origen", campos.idCmPais.selectedOptions[0].textContent],
         ["Imagen de avatar", campos.idArchivo.files[0].name]
     ];
-    bodyModal.replaceChildren(
-        crearTabla("Datos ingresados", ["Campo", "Valor"], datos),
-        crearTabla("Controles del formulario", ["Tipo", "Cantidad"], recorrerFormulario())
-    );
+    while (bodyModal.firstChild) {
+        bodyModal.removeChild(bodyModal.firstChild);
+    }
+    bodyModal.appendChild(crearTabla("Datos ingresados", ["Campo", "Valor"], datos));
+    bodyModal.appendChild(crearTabla("Controles del formulario", ["Tipo", "Cantidad"], recorrerFormulario()));
     modal.show();
 }
 

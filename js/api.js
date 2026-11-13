@@ -37,9 +37,7 @@ async function cargarListado() {
             opciones.appendChild(item);
         }
         listado.replaceChildren(opciones);
-        estadoListado.textContent = bebidas.length === 0
-            ? "No se encontraron bebidas."
-            : `${bebidas.length} bebidas disponibles.`;
+        estadoListado.textContent = bebidas.length === 0 ? "No se encontraron bebidas." : "";
     } catch {
         estadoListado.textContent = "No se pudo cargar el listado de bebidas.";
     } finally {
@@ -126,7 +124,7 @@ async function cargarDetalle(bebida, boton) {
         }
     } catch {
         if (!controlador.signal.aborted) {
-            estadoDetalle.textContent = "No se pudo cargar el detalle. Vuelva a seleccionar la bebida para reintentar.";
+            estadoDetalle.textContent = "No se pudo cargar el detalle de esta bebida.";
         }
     } finally {
         if (solicitudDetalle === controlador) {
