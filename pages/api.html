@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/styles.css" rel="stylesheet">
+    <link rel="icon" href="../img/js.png" sizes="32x32" type="image/png">
+    <title>Bebidas sin alcohol | Guía 7</title>
+</head>
+
+<body class="bg-body-tertiary">
+    <header class="p-3 text-bg-dark">
+        <nav class="container d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"
+            aria-label="Navegación de la guía">
+            <a href="../index.html" class="me-lg-2">
+                <img src="../img/js.png" class="me-2" width="48" height="48" alt="Inicio">
+            </a>
+            <ul class="nav col-12 col-lg-auto justify-content-center">
+                <li><a href="ejemplo1.html" class="nav-link px-2 text-white">Ejemplo 1</a></li>
+                <li><a href="ejemplo2.html" class="nav-link px-2 text-white">Ejemplo 2</a></li>
+                <li><a href="ejemplo3.html" class="nav-link px-2 text-white">Ejemplo 3</a></li>
+                <li><a href="ejemplo4.html" class="nav-link px-2 text-white">Ejemplo 4</a></li>
+                <li><a href="api.html" class="nav-link px-2 text-warning fw-bold" aria-current="page">API</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container py-4 py-md-5">
+        <h1 class="display-5 fw-bold mb-4">Bebidas sin alcohol</h1>
+        <div class="row g-4">
+            <section class="col-md-5 col-lg-4" aria-labelledby="tituloListado">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="h5" id="tituloListado">Bebidas</h2>
+                        <p class="small text-body-secondary mb-2" id="estadoListado" role="status">Cargando bebidas…</p>
+                        <button type="button" class="btn btn-outline-primary btn-sm" id="reintentarListado" hidden>
+                            Reintentar
+                        </button>
+                        <ul class="list-group lista-bebidas" id="listadoBebidas"></ul>
+                    </div>
+                </div>
+            </section>
+            <section class="col-md-7 col-lg-8" id="seccionDetalle" aria-labelledby="tituloDetalle">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="h5" id="tituloDetalle">Detalle de la bebida</h2>
+                        <p class="text-body-secondary mb-0" id="estadoDetalle" role="status">
+                            Seleccione una bebida del listado.
+                        </p>
+                        <div id="detalleBebida"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <footer class="small text-body-secondary mt-4">
+            Datos de <a href="https://www.thecocktaildb.com/api.php">TheCocktailDB</a> ·
+            <a href="https://rapidapi.com/thecocktaildb/api/the-cocktail-db/pricing">Plan Básico en RapidAPI</a>
+        </footer>
+    </main>
+
+    <script src="../js/api.js" defer></script>
+</body>
+
+</html>

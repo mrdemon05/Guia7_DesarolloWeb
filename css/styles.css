@@ -1,0 +1,21 @@
+@import url("../bootstrap/icons/bootstrap-icons.css");
+
+.lista-bebidas {
+    max-height: min(60vh, 33rem);
+    overflow-y: auto;
+}
+
+.lista-bebidas .list-group-item:focus-visible {
+    outline-offset: -3px;
+}
+
+.foto-bebida {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+
+.instrucciones-bebida {
+    white-space: pre-line;
+}
