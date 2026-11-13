@@ -2,10 +2,8 @@
 const api = "https://www.thecocktaildb.com/api/json/v1/1/";
 const listado = document.getElementById("listadoBebidas");
 const estadoListado = document.getElementById("estadoListado");
-const reintentarListado = document.getElementById("reintentarListado");
 const estadoDetalle = document.getElementById("estadoDetalle");
 const detalle = document.getElementById("detalleBebida");
-const seccionDetalle = document.getElementById("seccionDetalle");
 let bebidaActiva;
 let solicitudDetalle;
 
@@ -21,7 +19,6 @@ async function consultarBebidas(endpoint, signal = AbortSignal.timeout(12000)) {
 async function cargarListado() {
     estadoListado.textContent = "Cargando bebidas…";
     listado.setAttribute("aria-busy", "true");
-    reintentarListado.hidden = true;
 
     try {
         const bebidas = await consultarBebidas("filter.php?a=Non_Alcoholic");
@@ -44,8 +41,7 @@ async function cargarListado() {
             ? "No se encontraron bebidas."
             : `${bebidas.length} bebidas disponibles.`;
     } catch {
-        estadoListado.textContent = "No se pudo cargar el listado de bebidas. Intente de nuevo.";
-        reintentarListado.hidden = false;
+        estadoListado.textContent = "No se pudo cargar el listado de bebidas.";
     } finally {
         listado.removeAttribute("aria-busy");
     }
@@ -117,10 +113,6 @@ async function cargarDetalle(bebida, boton) {
     detalle.replaceChildren();
     detalle.setAttribute("aria-busy", "true");
     estadoDetalle.textContent = `Cargando el detalle de ${bebida.strDrink}…`;
-    if (matchMedia("(max-width: 767px)").matches) {
-        seccionDetalle.scrollIntoView({ block: "nearest" });
-    }
-
     try {
         const signal = AbortSignal.any([controlador.signal, AbortSignal.timeout(12000)]);
         const [resultado] = await consultarBebidas(`lookup.php?i=${encodeURIComponent(bebida.idDrink)}`, signal);
@@ -143,5 +135,4 @@ async function cargarDetalle(bebida, boton) {
     }
 }
 
-reintentarListado.addEventListener("click", cargarListado);
 cargarListado();
